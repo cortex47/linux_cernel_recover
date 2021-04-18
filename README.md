@@ -34,6 +34,35 @@ Linux Mint 19.2, kernel = 5.4.0-70-generic, boot device nvme0n1p3, root device n
 
 И вот мы в можем выполнять действия от основной операционной системы
 
-5. Удаляем все
+5. Удаляем все старые и текущие ядра
 
+`apt remove linux-image-5.4.0-71-generic`<br>
+`apt remove linux-image-5.4.0-72-generic`<br>
+`apt autoremove`<br>
+
+6. Очищаем каталог /boot от файлов суффиксами в названиях 5.4.0-71 и 5.4.0-72 <br>
+
+7. Устанавливаем по новой ядро 5.4.0-72 <br>
+
+`apt install linux-image-5.4.0-72-generic`<br>
+
+`update-initramfs -c -k 5.4.0-72-generic`<br>
+`update-grub`
+
+8. Проверяем содержимое файла modules.symbols на наличие драйверов сети и wifi
+`cat /lib/modules/5.4.0-72-generic/modules.symbols | grep rtl`
+- если содержимое не отображается, то при перезагрузке не будут работать wifi и еще другие устройства (например звук)
+- если содержимое отобразилось, то можно пропустить следующий пункт и перейти на пункт 10
+
+9. В моем случае помогла установка версии ядра lowlatency
+`apt install linux-image-5.4.0-72-lowlatency`<br>
+`update-initramfs`<br>
+`update-grub`<br>
+
+10. Выходим из chroot
+`exit`<br>
+
+11. Перезагружаемся в свою родную операционную систему.
+
+В большинстве случаев данных действий достаточно. 
 
