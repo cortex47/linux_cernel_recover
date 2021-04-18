@@ -1,2 +1,2 @@
-# linux_cernel_recover
+# linux_kernel_recover
 Recover operation system after upgrade to new kernel 
