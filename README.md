@@ -2,7 +2,9 @@
 Recover operation system after upgrade to new kernel 
 
 
-После неудачно попытки обновить ядро операционная система перестала грузиться.
+После неудачной попытки обновить ядро операционная система перестала грузиться.
+Иходные данные:
+Linux Mint 19.2, kernel = 5.4.0-70-generic, boot device nvme0n1p3, root device nvme0n1p4
 Если подробнее, то получилось это сделать следующим образом:
 1. Для каталога /boot оставил слишком мала места (235Mbyte)
 2. Накопилось несколько ядер 5.4.0-69-generic 5.4.0-70-generic 5.4.0-71-generic
@@ -16,4 +18,22 @@ Recover operation system after upgrade to new kernel
 
 1. Из другой операционной системы стоявшей на компьютере создал загрузочную флешку со своим дистрибутивом Mint 20
 2. Загрузился с загрузочной флешки
-3. 
+3. Осуществил настройку для chroot
+
+sudo mount /dev/nvme0n1p4 /mnt
+sudo mount /dev/nvme0n1p3 /mnt/boot
+
+sudo mount -t proc /proc /mnt/proc/
+sudo mount -t sysfs /sys /mnt/sys/
+sudo mount -o bind /tmp /mnt/tmp/
+sudo mount -o bind /dev /mnt/dev/
+
+4. Осуществляем chroot в /mnt
+
+sudo chroot /mnt /bin/bash
+
+И вот мы в можем выполнять действия от основной операционной системы
+
+5. Удаляем все
+
+
