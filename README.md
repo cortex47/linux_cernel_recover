@@ -20,17 +20,17 @@ Linux Mint 19.2, kernel = 5.4.0-70-generic, boot device nvme0n1p3, root device n
 2. Загрузился с загрузочной флешки
 3. Осуществил настройку для chroot
 
-`sudo mount /dev/nvme0n1p4 /mnt`
-`sudo mount /dev/nvme0n1p3 /mnt/boot`
+`sudo mount /dev/nvme0n1p4 /mnt`<br>
+`sudo mount /dev/nvme0n1p3 /mnt/boot`<br>
 
-`sudo mount -t proc /proc /mnt/proc/`
-`sudo mount -t sysfs /sys /mnt/sys/`
-`sudo mount -o bind /tmp /mnt/tmp/`
-`sudo mount -o bind /dev /mnt/dev/`
+`sudo mount -t proc /proc /mnt/proc/`<br>
+`sudo mount -t sysfs /sys /mnt/sys/`<br>
+`sudo mount -o bind /tmp /mnt/tmp/`<br>
+`sudo mount -o bind /dev /mnt/dev/`<br>
 
-4. Осуществляем chroot в /mnt
+4. Осуществляем chroot в /mnt <br>
 
-`sudo chroot /mnt /bin/bash`
+`sudo chroot /mnt /bin/bash`<br>
 
 И вот мы в можем выполнять действия от основной операционной системы
 
